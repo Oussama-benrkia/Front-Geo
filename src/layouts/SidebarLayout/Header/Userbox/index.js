@@ -60,9 +60,9 @@ const UserBoxDescription = styled(Typography)(
 
 function HeaderUserbox() {
   const user = {
-    name: 'Catherine Pike',
-    avatar: '/static/images/avatars/1.jpg',
-    jobtitle: 'Project Manager'
+    name: 'Utilisateur1',
+    avatar: '',
+    jobtitle: 'Admin'
   };
 
   const ref = useRef(null);
@@ -115,26 +115,26 @@ function HeaderUserbox() {
           </UserBoxText>
         </MenuUserBox>
         <Divider sx={{ mb: 0 }} />
-        <List sx={{ p: 1 }} component="nav">
-          <NextLink href="/management/profile" passHref>
+        {/* <List sx={{ p: 1 }} component="nav"> */}
+        {/* <NextLink href="/management/profile" passHref>
             <ListItem button>
               <AccountBoxTwoToneIcon fontSize="small" />
               <ListItemText primary="My Profile" />
             </ListItem>
-          </NextLink>
-          <NextLink href="/applications/messenger" passHref>
+          </NextLink> */}
+        {/* <NextLink href="/applications/messenger" passHref>
             <ListItem button>
               <InboxTwoToneIcon fontSize="small" />
               <ListItemText primary="Messenger" />
             </ListItem>
-          </NextLink>
-          <NextLink href="/management/profile/settings" passHref>
+          </NextLink> */}
+        {/* <NextLink href="/management/profile/settings" passHref>
             <ListItem button>
               <AccountTreeTwoToneIcon fontSize="small" />
               <ListItemText primary="Account Settings" />
             </ListItem>
-          </NextLink>
-        </List>
+          </NextLink> */}
+        {/* </List> */}
         <Divider />
         <Box sx={{ m: 1 }}>
           <Button color="primary" fullWidth>
