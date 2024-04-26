@@ -77,7 +77,7 @@ function HeaderMenu() {
 
   return (
     <>
-      <ListWrapper
+      {/* <ListWrapper
         sx={{
           display: {
             xs: 'none',
@@ -141,7 +141,7 @@ function HeaderMenu() {
         <MenuItem sx={{ px: 3 }} component={Link} href="/components/modals">
           Modals
         </MenuItem>
-      </Menu>
+      </Menu> */}
     </>
   );
 }

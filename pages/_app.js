@@ -23,7 +23,7 @@ function TokyoApp(props) {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <title>Tokyo Free Black NextJS Javascript Admin Dashboard</title>
+        <title>Dashboard</title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"

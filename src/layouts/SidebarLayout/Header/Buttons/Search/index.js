@@ -89,7 +89,7 @@ function HeaderSearch() {
 
   return (
     <>
-      <Tooltip arrow title="Search">
+      {/* <Tooltip arrow title="Search">
         <IconButton color="primary" onClick={handleClickOpen}>
           <SearchTwoToneIcon />
         </IconButton>
@@ -265,7 +265,7 @@ function HeaderSearch() {
             </Box>
           </DialogContent>
         )}
-      </DialogWrapper>
+      </DialogWrapper> */}
     </>
   );
 }
