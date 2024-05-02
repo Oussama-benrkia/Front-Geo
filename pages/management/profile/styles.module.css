@@ -1,0 +1,13 @@
+.userstable {
+  width: 95%;
+  border-collapse: collapse;
+  color: black;
+  background-color: aliceblue;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.th1 {
+  border: 2px solid black;
+  padding:10px;
+}
