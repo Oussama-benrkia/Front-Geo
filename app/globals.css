@@ -31,3 +31,8 @@ body {
     text-wrap: balance;
   }
 }
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: aqua;
+}

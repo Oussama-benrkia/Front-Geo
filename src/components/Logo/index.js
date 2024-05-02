@@ -102,26 +102,27 @@ const LogoText = styled(Box)(
 
 function Logo() {
   return (
-    <LogoWrapper href="/">
-      <LogoSignWrapper>
-        <LogoSign>
-          <LogoSignInner />
-        </LogoSign>
-      </LogoSignWrapper>
-      <Box
-        component="span"
-        sx={{
-          display: { xs: 'none', sm: 'inline-block' }
-        }}
-      >
-        <LogoTextWrapper>
-          <Tooltip title="Version 1.0" arrow placement="right">
-            <VersionBadge>1.0</VersionBadge>
-          </Tooltip>
-          <LogoText>Tokyo Free Black</LogoText>
-        </LogoTextWrapper>
-      </Box>
-    </LogoWrapper>
+    <></>
+    // <LogoWrapper href="/">
+    //   <LogoSignWrapper>
+    //     <LogoSign>
+    //       <LogoSignInner />
+    //     </LogoSign>
+    //   </LogoSignWrapper>
+    //   <Box
+    //     component="span"
+    //     sx={{
+    //       display: { xs: 'none', sm: 'inline-block' }
+    //     }}
+    //   >
+    //     <LogoTextWrapper>
+    //       <Tooltip title="Version 1.0" arrow placement="right">
+    //         <VersionBadge>1.0</VersionBadge>
+    //       </Tooltip>
+    //       <LogoText>Tokyo Free Black</LogoText>
+    //     </LogoTextWrapper>
+    //   </Box>
+    // </LogoWrapper>
   );
 }
 
