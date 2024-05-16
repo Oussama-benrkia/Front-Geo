@@ -81,7 +81,7 @@ function ManagementUserSettings() {
         {/* Include Leaflet JavaScript */}
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
       </Head>
-      <div id="map" style={{ height: '400px' }}></div>
+      <div id="map" style={{ height: '85vh' }}></div>
     </>
   );
 }
