@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import SidebarLayout from 'src/layouts/SidebarLayout';
 import { useState, useEffect } from 'react';
 import styles from './styles.module.css';
@@ -43,9 +44,26 @@ if(loading){
 if (error) {
   return <div>Error loading vehicles</div>;
 }
+/*const handleModify = (id) => {
+  
+  console.log(`Modify vehicle with ID: ${id}`);
+    navigate(`/edit-vehicle/${id}`);
+
+};*/
+
+const handleDelete = (id) => {
+  console.log(`Delete vehicle with ID: ${id}`);
+  // Implement delete functionality here
+};
+
+const handleAddNewVehicle = () => {
+  console.log("Add new vehicle");
+  // Implement add new vehicle functionality here
+};
 return (
   <>
-    <div>
+    <div className={styles.container}>
+    <button className={styles.addButton} onClick={handleAddNewVehicle}>Add New Vehicle</button>
       <table className={styles.userstable}>
         <thead>
           <tr className={styles.tr1}>
@@ -56,6 +74,7 @@ return (
             <th className={styles.th1}>Etat</th>
             <th className={styles.th1}>Status</th>
             <th className={styles.th1}>Type</th>
+            <th className={styles.th1}>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -79,6 +98,10 @@ return (
                 <td className={styles.th1} style={{ color: etatColor }}>{etatDisplay}</td>
                 <td className={styles.th1}>{vehicle.status}</td>
                 <td className={styles.th1}>{vehicle.type}</td>
+                <td className={styles.th1}>
+                <button className={styles.modifyButton} onClick={() => handleModify(vehicle.id)}>Modify</button>
+                <button className={styles.deleteButton} onClick={() => handleDelete(vehicle.id)}>Delete</button>
+                  </td>
               </tr>
             );
           })}

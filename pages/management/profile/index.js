@@ -43,9 +43,13 @@ if(loading){
 if (error) {
   return <div>Error loading users</div>;
 }
-
+const handleAddNewUser = () => {
+  console.log("Add new user");
+  // Implement add new vehicle functionality here
+};
 return (
-  <div>
+  <div className={styles.container}>
+<button className={styles.addButton} onClick={handleAddNewUser}>Add New User</button>
     <table className={styles.userstable}>
       <thead>
         <tr className={styles.tr1}>
@@ -53,6 +57,8 @@ return (
           <th className={styles.th1}>Nom</th>
           <th className={styles.th1}>Prenom</th>
           <th className={styles.th1}>Email</th>
+          <th className={styles.th1}>Role</th>
+          <th className={styles.th1}>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -62,6 +68,11 @@ return (
             <td className={styles.th1}>{user.first_name}</td>
             <td className={styles.th1}>{user.last_name}</td>
             <td className={styles.th1}>{user.email}</td>
+            <td className={styles.th1}>{user.role}</td>
+            <td className={styles.th1}>
+<button className={styles.modifyButton} onClick={() => handleModify(vehicle.id)}>Modify</button>
+<button className={styles.deleteButton} onClick={() => handleDelete(vehicle.id)}>Delete</button>
+  </td>
           </tr>
         ))}
       </tbody>
