@@ -35,7 +35,7 @@ const OutlinedInputWrapper = styled(OutlinedInput)(
 `
 );
 
-function TaskSearch() {
+function VehicleSearch() {
   const theme = useTheme();
 
   const handleDelete = () => {};
@@ -518,4 +518,4 @@ function TaskSearch() {
   );
 }
 
-export default TaskSearch;
+export default VehicleSearch;

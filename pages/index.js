@@ -22,7 +22,7 @@ import Performance from 'src/content/Dashboards/Tasks/Performance';
 import Projects from 'src/content/Dashboards/Tasks/Projects';
 import Checklist from 'src/content/Dashboards/Tasks/Checklist';
 import Profile from 'src/content/Dashboards/Tasks/Profile';
-import TaskSearch from 'src/content/Dashboards/Tasks/TaskSearch';
+import TaskSearch from 'src/content/Dashboards/Tasks/VehicleSearch';
 
 const TabsContainerWrapper = styled(Box)(
   ({ theme }) => `

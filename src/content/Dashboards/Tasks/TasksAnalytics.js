@@ -176,7 +176,7 @@ function TasksAnalytics() {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Typography variant="h4">Tasks Analytics</Typography>
+        <Typography variant="h4">Vehicles Analytics</Typography>
         <Button
           size="small"
           variant="contained"
@@ -225,7 +225,7 @@ function TasksAnalytics() {
           }}
         >
           <DotPrimary />
-          tasks created
+          Added/New
         </Typography>
         <Typography
           variant="body2"
@@ -236,7 +236,7 @@ function TasksAnalytics() {
           }}
         >
           <DotPrimaryLight />
-          tasks completed
+          Out Of Store
         </Typography>
       </Box>
       <Chart

@@ -87,6 +87,9 @@ function ApplicationsMessenger() {
       <Head>
         <title>Messenger - Applications</title>
       </Head>
+      <div style={{ padding: '20px', background: 'lightblue' }}>
+        Messenger Application is working!
+      </div>
       <RootWrapper className="Mui-FixedWrapper">
         <DrawerWrapperMobile
           sx={{

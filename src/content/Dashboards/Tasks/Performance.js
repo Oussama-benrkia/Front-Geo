@@ -100,7 +100,7 @@ function Performance() {
           <Box>
             <Typography variant="h1">23</Typography>
             <TypographySecondary variant="subtitle2" noWrap>
-              tasks created
+              Vehicles well-ordred
             </TypographySecondary>
           </Box>
         </Box>
@@ -123,7 +123,7 @@ function Performance() {
           <Box>
             <Typography variant="h1">5</Typography>
             <TypographySecondary variant="subtitle2" noWrap>
-              tasks closed
+              Vehicles out of order
             </TypographySecondary>
           </Box>
         </Box>

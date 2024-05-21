@@ -20,6 +20,9 @@ import CalendarTodayTwoToneIcon from '@mui/icons-material/CalendarTodayTwoTone';
 import CheckTwoToneIcon from '@mui/icons-material/CheckTwoTone';
 import StarTwoToneIcon from '@mui/icons-material/StarTwoTone';
 
+/**
+ * Styled Avatar component with success background color and text color
+ */
 const AvatarWrapperSuccess = styled(Avatar)(
   ({ theme }) => `
       background-color: ${theme.colors.success.lighter};
@@ -27,6 +30,9 @@ const AvatarWrapperSuccess = styled(Avatar)(
 `
 );
 
+/**
+ * Styled DotLegend component for displaying status indicators
+ */
 const DotLegend = styled('span')(
   ({ theme }) => `
     border-radius: 22px;
@@ -38,6 +44,9 @@ const DotLegend = styled('span')(
 `
 );
 
+/**
+ * Styled LinearProgress component with custom height and margin
+ */
 const LinearProgressWrapper = styled(LinearProgress)(
   ({ theme }) => `
         flex-grow: 1;
@@ -54,6 +63,9 @@ const LinearProgressWrapper = styled(LinearProgress)(
 `
 );
 
+/**
+ * Projects component renders a list of project cards with task progress and team members
+ */
 function Projects() {
   const theme = useTheme();
 

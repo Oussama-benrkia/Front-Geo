@@ -10,6 +10,9 @@ const BaseLayout = ({ children }) => {
         height: '100%'
       }}
     >
+      <div style={{ padding: '20px', background: 'lightblue', width: '100%' }}>
+        BaseLayout Component is working!
+      </div>
       {children}
     </Box>
   );

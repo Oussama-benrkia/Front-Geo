@@ -77,8 +77,8 @@ function TeamOverview() {
               }
             >
               <AvatarWrapper
-                alt="Remy Sharp"
-                src="/static/images/avatars/4.jpg"
+                alt=""
+                src="/static/images/vehicles/TOYOTA_CAMARO.jpg"
               />
             </Badge>
             <Box
@@ -87,23 +87,15 @@ function TeamOverview() {
               }}
             >
               <Typography variant="h4" noWrap gutterBottom>
-                Hanna Siphron
+                Toyota Camaro
               </Typography>
               <Typography variant="subtitle2" noWrap>
-                Web Dev Support Team
+                Vehicle out of order!
               </Typography>
             </Box>
           </Box>
 
-          <Typography variant="subtitle2" gutterBottom>
-            <Text color="black">4</Text> out of <Text color="black">6</Text>{' '}
-            tasks completed
-          </Typography>
-          <LinearProgressWrapper
-            value={65}
-            color="primary"
-            variant="determinate"
-          />
+        
         </Box>
       </Grid>
       <Grid item xs={12} md={4}>
@@ -133,8 +125,8 @@ function TeamOverview() {
               }
             >
               <AvatarWrapper
-                alt="Ann Saris"
-                src="/static/images/avatars/3.jpg"
+                alt=""
+                src="/static/images/vehicles/BMW_M5.jpg"
               />
             </Badge>
             <Box
@@ -143,23 +135,13 @@ function TeamOverview() {
               }}
             >
               <Typography variant="h4" noWrap gutterBottom>
-                Ann Saris
+                BMW M5
               </Typography>
               <Typography variant="subtitle2" noWrap>
-                Senior Book Keeper
+                New Vehicle!
               </Typography>
             </Box>
           </Box>
-
-          <Typography variant="subtitle2" gutterBottom>
-            <Text color="black">2</Text> out of <Text color="black">8</Text>{' '}
-            tasks completed
-          </Typography>
-          <LinearProgressWrapper
-            value={25}
-            color="primary"
-            variant="determinate"
-          />
         </Box>
       </Grid>
       <Grid item xs={12} md={4}>
@@ -189,8 +171,8 @@ function TeamOverview() {
               }
             >
               <AvatarWrapper
-                alt="James Stanton"
-                src="/static/images/avatars/5.jpg"
+                alt=""
+                src="/static/images/vehicles/PEUGO_S.jpg"
               />
             </Badge>
             <Box
@@ -199,23 +181,13 @@ function TeamOverview() {
               }}
             >
               <Typography variant="h4" noWrap gutterBottom>
-                James Stanton
+                Peugeot S
               </Typography>
               <Typography variant="subtitle2" noWrap>
-                Phone Pre-Sales Assistant
+                Vehicle out of order!
               </Typography>
             </Box>
           </Box>
-
-          <Typography variant="subtitle2" gutterBottom>
-            <Text color="black">10</Text> out of <Text color="black">20</Text>{' '}
-            tasks completed
-          </Typography>
-          <LinearProgressWrapper
-            value={50}
-            color="primary"
-            variant="determinate"
-          />
         </Box>
       </Grid>
     </Grid>
