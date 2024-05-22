@@ -1,8 +1,29 @@
+"use client";
+import React from "react";
 import Image from "next/image";
+import "./page.css";
+import { useRouter } from "next/navigation";
+import { useState, useContext, useEffect } from "react";
+import { UserContext } from "./layout";
+
+const [islogged, setIslogged] = useState(false);
+const [userdata, setUserdata] = useState([]);
+const router = useRouter();
+
+useEffect(() => {
+  const usertoken = localStorage.getItem("token");
+  if (usertoken) {
+    // router.push("/login");
+    setIslogged(true);
+  }
+});
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <div className="text-center text-xl font-bold text-gray-800">
+        Welcome to the Next.js Home Page!
+      </div>
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           Get started by editing&nbsp;
@@ -108,6 +129,7 @@ export default function Home() {
           </p>
         </a>
       </div>
+      
     </main>
   );
 }

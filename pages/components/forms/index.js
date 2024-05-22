@@ -1,32 +1,71 @@
+import { useRouter } from 'next/router';
 import SidebarLayout from 'src/layouts/SidebarLayout';
 import { useState, useEffect } from 'react';
 import styles from './styles.module.css';
+
 function Forms() {
-  const [users, setUsers] = useState([]);
+  const [vehicles, setVehicles] = useState([]);
+  const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
   useEffect(() => {
-    fetch('http://localhost:8080/api/vehicule',{
-      method: 'GET',
-      headers:{
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbeyJhdXRob3JpdHkiOiJBZG1pbiJ9XSwic3ViIjoiQWRtaW5AQWRtaW4uY29tIiwiaWF0IjoxNzE0ODM4ODA1LCJleHAiOjE3MTU0NDM2MDV9.qVCvzwWIWYdZoD09Y59eVcvLz1_Cm_KitvrX5n3XvNY',
+    const fetchData = async() =>{
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setError(new Error("No token found"));
+        setLoading(false);
+        return;
+      }
+    try{
+    const response = await fetch('http://localhost:8081/api/vehicule', {
+      method: 'GET',// or POST, PUT, DELETE, etc.
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbeyJhdXRob3JpdHkiOiJBZG1pbiJ9XSwic3ViIjoiQWRtaW5AQWRtaW4uY29tIiwiaWF0IjoxNzE2MTE5MTAwLCJleHAiOjE3MTY3MjM5MDB9.B2yEvK17qVKGd37fq4ZTKFD1yIKmjP7GClSLNp9dHZw`,
         'Content-Type': 'application/json', 
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setUsers(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
+      }
+    });
+    if(!response.ok){
+      throw new Error('Network response was not ok');
+    }
     
-      });
-  }, []);
-  return (
-    <>
-      <div>
-        <table className={styles.userstable}>
+    const data = await response.json();
+    setVehicles(data);
+    setLoading(false);
+} catch(error){
+  setError(error);
+  setLoading(false);
+}
+
+};
+    fetchData();  
+}, []);
+if(loading){
+  return <div>Loading...</div>;
+} 
+if (error) {
+  return <div>Error loading vehicles</div>;
+}
+/*const handleModify = (id) => {
+  
+  console.log(`Modify vehicle with ID: ${id}`);
+    navigate(`/edit-vehicle/${id}`);
+
+};*/
+
+const handleDelete = (id) => {
+  console.log(`Delete vehicle with ID: ${id}`);
+  // Implement delete functionality here
+};
+
+const handleAddNewVehicle = () => {
+  console.log("Add new vehicle");
+  // Implement add new vehicle functionality here
+};
+return (
+  <>
+    <div className={styles.container}>
+    <button className={styles.addButton} onClick={handleAddNewVehicle}>Add New Vehicle</button>
+      <table className={styles.userstable}>
+        <thead>
           <tr className={styles.tr1}>
             <th className={styles.th1}>ID</th>
             <th className={styles.th1}>Matricule</th>
@@ -34,23 +73,44 @@ function Forms() {
             <th className={styles.th1}>Modele</th>
             <th className={styles.th1}>Etat</th>
             <th className={styles.th1}>Status</th>
-            <th className={styles.th1}>type</th>
+            <th className={styles.th1}>Type</th>
+            <th className={styles.th1}>Action</th>
           </tr>
-          {users.map((user, i) => (
-            <tr className={styles.tr1}>
-              <td className={styles.th1}>{user.id}</td>
-              <td className={styles.th1}>{user.matricule}</td>
-              <td className={styles.th1}>{user.nom}</td>
-              <td className={styles.th1}>{user.modele}</td>
-              <td className={styles.th1}>{user.etat}</td>
-              <td className={styles.th1}>{user.status}</td>
-              <td className={styles.th1}>{user.type}</td>
-            </tr>
-          ))}
-        </table>
-      </div>
-    </>
-  );
+        </thead>
+        <tbody>
+          {vehicles.map((vehicle, i) => {
+            let etatDisplay;
+            let etatColor;
+            if (vehicle.etat === true) {
+              etatDisplay = "actif";
+              etatColor = "green";
+            } else if (vehicle.etat === false) {
+              etatDisplay = "inactif";
+              etatColor = "red";
+            }
+            console.log(`Vehicle ID: ${vehicle.id}, Etat: ${vehicle.etat}, Display: ${etatDisplay}`);
+            return (
+              <tr className={styles.tr1} key={i}>
+                <td className={styles.th1}>{vehicle.id}</td>
+                <td className={styles.th1}>{vehicle.matricule}</td>
+                <td className={styles.th1}>{vehicle.nom}</td>
+                <td className={styles.th1}>{vehicle.modele}</td>
+                <td className={styles.th1} style={{ color: etatColor }}>{etatDisplay}</td>
+                <td className={styles.th1}>{vehicle.status}</td>
+                <td className={styles.th1}>{vehicle.type}</td>
+                <td className={styles.th1}>
+                <button className={styles.modifyButton} onClick={() => handleModify(vehicle.id)}>Modify</button>
+                <button className={styles.deleteButton} onClick={() => handleDelete(vehicle.id)}>Delete</button>
+                  </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  </>
+);
+
 }
 
 Forms.getLayout = (page) => <SidebarLayout>{page}</SidebarLayout>;

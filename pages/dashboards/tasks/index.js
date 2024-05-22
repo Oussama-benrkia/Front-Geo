@@ -22,7 +22,7 @@ import Performance from 'src/content/Dashboards/Tasks/Performance';
 import Projects from 'src/content/Dashboards/Tasks/Projects';
 import Checklist from 'src/content/Dashboards/Tasks/Checklist';
 import Profile from 'src/content/Dashboards/Tasks/Profile';
-import TaskSearch from 'src/content/Dashboards/Tasks/TaskSearch';
+import VehicleSearch from 'src/content/Dashboards/Tasks/VehicleSearch';
 
 const TabsContainerWrapper = styled(Box)(
   ({ theme }) => `
@@ -113,7 +113,7 @@ function DashboardTasks() {
 
   const tabs = [
     { value: 'analytics', label: 'Analytics Overview' },
-    { value: 'taskSearch', label: 'Task Search' }
+    { value: 'vehicleSearch', label: 'Vehicle Search' }
   ];
 
   const handleTabsChange = (_event, value) => {
@@ -125,10 +125,10 @@ function DashboardTasks() {
       <Head>
         <title>Dashboard</title>
       </Head>
-      {/* <PageTitleWrapper>
+      { <PageTitleWrapper>
         <PageHeader />
-      </PageTitleWrapper> */}
-      {/* <Container maxWidth="lg">
+      </PageTitleWrapper> }
+      { <Container maxWidth="lg">
         <TabsContainerWrapper>
           <Tabs
             onChange={handleTabsChange}
@@ -210,17 +210,17 @@ function DashboardTasks() {
                 </Grid>
               </>
             )}
-            {currentTab === 'taskSearch' && (
+            {currentTab === 'vehicleSearch' && (
               <Grid item xs={12}>
                 <Box p={4}>
-                  <TaskSearch />
+                  <VehicleSearch />
                 </Box>
               </Grid>
             )}
           </Grid>
         </Card>
-      </Container> */}
-      {/* <Footer /> */}
+      </Container> }
+      { <Footer /> }
     </>
   );
 }

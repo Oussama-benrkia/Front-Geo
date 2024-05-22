@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import SidebarLayout from 'src/layouts/SidebarLayout';
+import L from 'leaflet';
 
 function ManagementUserSettings() {
   const [map, setMap] = useState(null); // State to store the map instance
