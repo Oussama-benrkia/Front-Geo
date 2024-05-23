@@ -10,12 +10,7 @@ function ManagementUserProfile() {
     const router = useRouter();
   useEffect(() => {
     const fetchData = async() =>{
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setError(new Error("No token found"));
-        setLoading(false);
-        return;
-      }
+
     try{
     const response = await fetch('http://localhost:8081/api/users', {
       method: 'GET',// or POST, PUT, DELETE, etc.
