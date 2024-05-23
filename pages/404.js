@@ -13,7 +13,7 @@ import {
 import Head from 'next/head';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 
-import BaseLayout from 'src/layouts/BaseLayout';
+import BaseLayout from '../src/layouts/BaseLayout';
 
 const MainContent = styled(Box)(
   () => `
