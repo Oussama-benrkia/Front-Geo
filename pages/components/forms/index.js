@@ -9,13 +9,8 @@ function Forms() {
     const [error, setError] = useState(null);
     const router = useRouter();
   useEffect(() => {
-    const fetchData = async() =>{
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setError(new Error("No token found"));
-        setLoading(false);
-        return;
-      }
+       const fetchData = async() =>{
+      
     try{
     const response = await fetch('http://localhost:8081/api/vehicule', {
       method: 'GET',// or POST, PUT, DELETE, etc.
@@ -51,23 +46,16 @@ const handleModify = (id) => {
     navigate(`/edit-vehicle/${id}`);
 
 };
-
 const handleDelete = async (id) => {
   console.log(`Delete vehicle with ID: ${id}`);
 
   const confirmed = window.confirm('Are you sure you want to delete this vehicle?');
 
   if (!confirmed) {
-    return; 
+    return;
   }
 
   try {
-    const token = localStorage.getItem("token");
-    console.log(`Token: ${token}`);
-    if (!token) {
-      throw new Error("No token found");
-    }
-
     const response = await fetch(`http://localhost:8081/api/vehicule/${id}`, {
       method: 'DELETE',
       headers: {
@@ -84,7 +72,7 @@ const handleDelete = async (id) => {
     }
 
     console.log('Vehicle deleted successfully');
-    //setVehicles(vehicles.filter(vehicle => vehicle.id !== id));
+    setVehicles(vehicles.filter(vehicle => vehicle.id !== id));
   } catch (error) {
     console.error('Error deleting vehicle:', error);
     setError(error);
