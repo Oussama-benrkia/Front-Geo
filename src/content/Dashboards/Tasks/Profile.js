@@ -28,14 +28,14 @@ function Profile() {
           height: theme.spacing(12)
         }}
         variant="rounded"
-        alt="Craig Donin"
-        src="/static/images/avatars/4.jpg"
+        alt=""
+        src="/static/images/vehicles/BMW_M5.jpg"
       />
       <Typography align="center" variant="h4" gutterBottom>
-        Craig Donin
+        BMW M5
       </Typography>
       <Typography align="center" variant="subtitle2" gutterBottom>
-        Senior Web Developer
+        Vehicle added recently
       </Typography>
 
       <Box display="flex" alignItems="center" justifyContent="center">
