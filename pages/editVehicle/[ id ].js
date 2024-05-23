@@ -7,7 +7,14 @@ const EditVehiclePage = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  return <EditVehicle vehicleId={id} />;
+  console.log('Router query:', router.query); // Add this line to verify the router query
+
+  if (!id) {
+    return <div>Loading...</div>; // Handle the case when `id` is not available yet
+  }
+
+  return <EditVehicle id={id} />;
 };
+EditVehiclePage.getLayout = (page) => <SidebarLayout>{page}</SidebarLayout>;
 
 export default EditVehiclePage;

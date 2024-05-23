@@ -1,4 +1,5 @@
 "use client"
+import { useRouter } from 'next/router';
 import SidebarLayout from 'src/layouts/SidebarLayout';
 import { useState, useEffect } from 'react';
 import styles from './styles.module.css';
@@ -6,6 +7,7 @@ function ManagementUserProfile() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const router = useRouter();
   useEffect(() => {
     const fetchData = async() =>{
       const token = localStorage.getItem("token");
@@ -45,6 +47,7 @@ if (error) {
 }
 const handleAddNewUser = () => {
   console.log("Add new user");
+  router.push('/add-user');
   // Implement add new vehicle functionality here
 };
 return (

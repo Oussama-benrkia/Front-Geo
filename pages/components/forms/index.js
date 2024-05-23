@@ -2,11 +2,12 @@ import { useRouter } from 'next/router';
 import SidebarLayout from 'src/layouts/SidebarLayout';
 import { useState, useEffect } from 'react';
 import styles from './styles.module.css';
-
+import Link from 'next/link';
 function Forms() {
   const [vehicles, setVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const router = useRouter();
   useEffect(() => {
     const fetchData = async() =>{
       const token = localStorage.getItem("token");
@@ -44,24 +45,60 @@ if(loading){
 if (error) {
   return <div>Error loading vehicles</div>;
 }
-/*const handleModify = (id) => {
+const handleModify = (id) => {
   
   console.log(`Modify vehicle with ID: ${id}`);
     navigate(`/edit-vehicle/${id}`);
 
-};*/
+};
 
-const handleDelete = (id) => {
+const handleDelete = async (id) => {
   console.log(`Delete vehicle with ID: ${id}`);
-  // Implement delete functionality here
+
+  const confirmed = window.confirm('Are you sure you want to delete this vehicle?');
+
+  if (!confirmed) {
+    return; 
+  }
+
+  try {
+    const token = localStorage.getItem("token");
+    console.log(`Token: ${token}`);
+    if (!token) {
+      throw new Error("No token found");
+    }
+
+    const response = await fetch(`http://localhost:8081/api/vehicule/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbeyJhdXRob3JpdHkiOiJBZG1pbiJ9XSwic3ViIjoiQWRtaW5AQWRtaW4uY29tIiwiaWF0IjoxNzE2MTE5MTAwLCJleHAiOjE3MTY3MjM5MDB9.B2yEvK17qVKGd37fq4ZTKFD1yIKmjP7GClSLNp9dHZw`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      if (response.status === 403) {
+        throw new Error('Failed to delete vehicle: Forbidden (403)');
+      }
+      throw new Error('Failed to delete vehicle');
+    }
+
+    console.log('Vehicle deleted successfully');
+    //setVehicles(vehicles.filter(vehicle => vehicle.id !== id));
+  } catch (error) {
+    console.error('Error deleting vehicle:', error);
+    setError(error);
+  }
 };
 
 const handleAddNewVehicle = () => {
   console.log("Add new vehicle");
-  // Implement add new vehicle functionality here
+  
+  router.push('/add-vehicle');
 };
 return (
   <>
+    
     <div className={styles.container}>
     <button className={styles.addButton} onClick={handleAddNewVehicle}>Add New Vehicle</button>
       <table className={styles.userstable}>
@@ -99,11 +136,15 @@ return (
                 <td className={styles.th1}>{vehicle.status}</td>
                 <td className={styles.th1}>{vehicle.type}</td>
                 <td className={styles.th1}>
-                <button className={styles.modifyButton} onClick={() => handleModify(vehicle.id)}>Modify</button>
+                <Link href={`/edit-vehicle/${vehicle.id}`}>
+  <button className={styles.modifyButton}>Modify</button>
+</Link>
+
                 <button className={styles.deleteButton} onClick={() => handleDelete(vehicle.id)}>Delete</button>
                   </td>
               </tr>
             );
+
           })}
         </tbody>
       </table>
