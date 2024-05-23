@@ -76,60 +76,7 @@ function Forms() {
   };
   return (
     <>
-      <CContainer className="reservations-management-container">
-        <CRow className="justify-content-center">
-          <CCol md={12}></CCol>
-          <CCard>
-            <CCardBody>
-              <h2>Reservations Management Page</h2>
-              <CTable align="middle" className="mb-0 border" hover responsive>
-                <CTableHead>
-                  <CTableRow>
-                    <CTableHeaderCell className="bg-body-tertiary">ID</CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary">Matricule</CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary">Nom</CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary">Modele</CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary">Etat</CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary">Status</CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary">Type</CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary text-end">Actions</CTableHeaderCell>
-                  </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                  {vehicles.map(vehicle => (
-                    <CTableRow key={vehicle.id}>
-                      <CTableDataCell>{vehicle.id}</CTableDataCell>
-                      <CTableDataCell>{vehicle.matricule}</CTableDataCell>
-                      <CTableDataCell>{vehicle.nom}</CTableDataCell>
-                      <CTableDataCell>{vehicle.modele}</CTableDataCell>
-                      <CTableDataCell>{vehicle.etat}</CTableDataCell>
-                      <CTableDataCell>{vehicle.status}</CTableDataCell>
-                      <CTableDataCell>{vehicle.type}</CTableDataCell>
-                      <CTableDataCell className="text-end">
-                        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                          {/* <CButton
-                            className="me-md-2 delete-button"
-                            color="danger"
-                            shape="rounded-pill"
-                            onClick={() => deleteReservation(reservation.id)}
-                          >
-                            Delete
-                          </CButton>
-                          <CButton
-                            color="info" shape="rounded-pill" as={Link} to={`/actions/update-reservation/${reservation.id}`}>Update
-                          </CButton> */}
-                        </div>
-                      </CTableDataCell>
-                    </CTableRow>
-                  ))}
-                </CTableBody>
-              </CTable>
-
-            </CCardBody>
-          </CCard>
-        </CRow>
-      </CContainer>
-
+    <h1>Vehicles</h1>
       <div className={styles.container}>
         <button className={styles.addButton} onClick={handleAddNewVehicle}>Add New Vehicle</button>
         <table className={styles.userstable}>
