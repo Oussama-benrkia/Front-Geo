@@ -43,7 +43,7 @@ export default function LoginPage() {
         <div className="shape"></div>
       </div>
       <form className={styles['login-form']} onSubmit={handleSubmit}>
-        <h3>Login</h3>
+        <h3>Welcome</h3>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <label className={styles['login-label']} htmlFor="username">Email</label>
         <input className={styles['login-input']}
