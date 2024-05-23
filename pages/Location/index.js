@@ -7,8 +7,15 @@ function ManagementUserSettings() {
   const [map, setMap] = useState(null); // State to store the map instance
 
   useEffect(() => {
-    // Check if the DOM is available before initializing Leaflet
-    if (document) {
+    const checkAuthentication=()=>{
+    const token = localStorage.getItem('token');
+    if (!token) {
+      router.push('/login');
+    }
+    return token;
+  };
+  const token=checkAuthentication()
+      if (document) {
       // Initialize map
       const mapInstance = L.map('map');
 

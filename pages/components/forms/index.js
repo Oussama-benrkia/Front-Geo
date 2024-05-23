@@ -1,42 +1,35 @@
+"use client";
 import { useRouter } from 'next/router';
 import SidebarLayout from 'src/layouts/SidebarLayout';
 import { useState, useEffect } from 'react';
 import styles from './styles.module.css';
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCol,
-  CContainer,
-  CRow,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow
-} from '@coreui/react';
+import Link from 'next/link';
 
 function Forms() {
   const [vehicles, setVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const router = useRouter();
+ 
   useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem("token");
+    const checkAuthentication = () => {
+      const token = localStorage.getItem('token');
       if (!token) {
-        setError(new Error("No token found"));
-        setLoading(false);
-        return;
+        router.push('/login');
       }
+      return token;
+    };
+    const token=checkAuthentication()
+    const fetchData = async () => {
       try {
         const response = await fetch('http://localhost:8081/api/vehicule', {
-          method: 'GET',// or POST, PUT, DELETE, etc.
+          method: 'GET',
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbeyJhdXRob3JpdHkiOiJBZG1pbiJ9XSwic3ViIjoiQWRtaW5AQWRtaW4uY29tIiwiaWF0IjoxNzE2MTE5MTAwLCJleHAiOjE3MTY3MjM5MDB9.B2yEvK17qVKGd37fq4ZTKFD1yIKmjP7GClSLNp9dHZw`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
-          }
+          },
         });
+
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -48,35 +41,64 @@ function Forms() {
         setError(error);
         setLoading(false);
       }
-
     };
+
     fetchData();
   }, []);
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    return <div>Error loading vehicles</div>;
-  }
-  /*const handleModify = (id) => {
-    
-    console.log(`Modify vehicle with ID: ${id}`);
-      navigate(`/edit-vehicle/${id}`);
-  
-  };*/
 
-  const handleDelete = (id) => {
-    console.log(`Delete vehicle with ID: ${id}`);
-    // Implement delete functionality here
-  };
+  if (loading) {
+    return <div className={styles.loading}>Loading...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.error}>Error loading vehicles</div>;
+  }
 
   const handleAddNewVehicle = () => {
-    console.log("Add new vehicle");
-    // Implement add new vehicle functionality here
+    router.push('/add-vehicle');
   };
+
+  const handleDelete = async (id) => {
+    const confirmed = window.confirm('Are you sure you want to delete this vehicle?');
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      const checkAuthentication = () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          router.push('/login');
+        }
+        return token;
+      };
+      const token =checkAuthentication()
+      const response = await fetch(`http://localhost:8081/api/vehicule/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        if (response.status === 403) {
+          throw new Error('Failed to delete vehicle: Forbidden (403)');
+        }
+        throw new Error('Failed to delete vehicle');
+      }
+
+      setVehicles(vehicles.filter(vehicle => vehicle.id !== id));
+    } catch (error) {
+      console.error('Error deleting vehicle:', error);
+      setError(error);
+    }
+  };
+
   return (
     <>
-    <h1>Vehicles</h1>
+      
+
       <div className={styles.container}>
         <button className={styles.addButton} onClick={handleAddNewVehicle}>Add New Vehicle</button>
         <table className={styles.userstable}>
@@ -125,7 +147,6 @@ function Forms() {
       </div>
     </>
   );
-
 }
 
 Forms.getLayout = (page) => <SidebarLayout>{page}</SidebarLayout>;
