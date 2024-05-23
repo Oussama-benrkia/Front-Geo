@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import styles from './components/forms/styles.module.css';
-import SidebarLayout from 'src/layouts/SidebarLayout';
+import styles from './styles.module.css';
 function AddVehicle() {
   const [matricule, setMatricule] = useState('');
   const [nom, setNom] = useState('');
@@ -67,39 +66,46 @@ function AddVehicle() {
 
   return (
     <div className={styles.formContainer}>
-      <h1>Add New Vehicle</h1>
-      <form onSubmit={handleSubmit}>
+      <h1 className={styles.title}>Add New Vehicle</h1>
+      <form onSubmit={handleSubmit}className={styles.form}>
         <div className={styles.formGroup}>
           <label>Matricule:</label>
-          <input type="text" value={matricule} onChange={(e) => setMatricule(e.target.value)} required />
+          <input             className={styles.input}
+ type="text" value={matricule} onChange={(e) => setMatricule(e.target.value)} required />
         </div>
         <div className={styles.formGroup}>
           <label>Nom:</label>
-          <input type="text" value={nom} onChange={(e) => setNom(e.target.value)} required />
+          <input             className={styles.input}
+ type="text" value={nom} onChange={(e) => setNom(e.target.value)} required />
         </div>
         <div className={styles.formGroup}>
           <label>Modele:</label>
-          <input type="text" value={modele} onChange={(e) => setModele(e.target.value)} required />
+          <input             className={styles.input}
+ type="text" value={modele} onChange={(e) => setModele(e.target.value)} required />
         </div>
         
         <div className={styles.formGroup}>
           <label>Etat:</label>
-          <select value={etat} onChange={(e) => setEtat(e.target.value)}>
+          <select             className={styles.input}
+ value={etat} onChange={(e) => setEtat(e.target.value)}>
             <option value="actif">Actif</option>
             <option value="inactif">Inactif</option>
           </select>
         </div>
             <div className={styles.formGroup}>
           <label>Status:</label>
-          <input type="text" value={status} onChange={(e) => setStatus(e.target.value)} required />
+          <input             className={styles.input}
+ type="text" value={status} onChange={(e) => setStatus(e.target.value)} required />
         </div>
         <div className={styles.formGroup}>
           <label>Type:</label>
-          <input type="text" value={type} onChange={(e) => setType(e.target.value)} required />
+          <input             className={styles.input}
+ type="text" value={type} onChange={(e) => setType(e.target.value)} required />
         </div>
         <div className={styles.formGroup}>
           <label>Image:</label>
-          <input type="file" onChange={handleImageChange} />
+          <input             className={styles.input}
+ type="file" onChange={handleImageChange} />
         </div>
         <button type="submit" className={styles.submitButton}>Add Vehicle</button>
       </form>

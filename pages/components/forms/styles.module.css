@@ -1,63 +1,10 @@
-.userstable {
-  width: 95%;
-  border-collapse: collapse;
-  border-radius: 10px;
-  margin: 20px;
-}
-
-.th1 {
-  border: 2px solid black;
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid black ;
-}
-
-
-.tr1:hover {
-  background-color: #f5f5f51e;
-  
-}
-
-.modifyButton {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 5px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-.modifyButton:hover {
-  background-color: #4caf4f19;
-}
-
-
-.deleteButton {
-  background-color: #f44336; /* Red */
-  border: none;
-  color: white;
-  padding: 5px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-.modifyButton:hover {
-  background-color: #007bb5;
-}
-
 .container {
   padding: 20px;
+  font-family: Arial, sans-serif;
 }
+
 .addButton {
-  background-color: #008CBA; /* Blue */
+  background-color: #4CAF50; /* Green */
   border: none;
   color: white;
   padding: 10px 20px;
@@ -67,92 +14,67 @@
   font-size: 16px;
   margin-bottom: 20px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 5px;
+  transition-duration: 0.4s;
 }
+
 .addButton:hover {
-  background-color: #7fbbcf1b;
-}
-.confirmation-dialog {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #45a049;
 }
 
-.confirmation-dialog-message {
-  margin-bottom: 20px;
+.userstable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
-.confirmation-dialog-buttons {
-  display: flex;
-  justify-content: center;
-}
-
-.confirmation-dialog-buttons button {
-  margin: 0 10px;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.confirmation-dialog-buttons button.cancel {
-  background-color: #f0f0f0;
-  color: #333;
-}
-
-.confirmation-dialog-buttons button.confirm {
-  background-color: #ff5252;
-  color: white;
-}
 .userstable th, .userstable td {
   border: 1px solid #ddd;
-  padding: 8px;
-}
-.formContainer {
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 12px 15px;
+  text-align: left;
 }
 
-.formGroup {
-  margin-bottom: 15px;
+.userstable th {
+  background-color: #4b4b4b;
 }
 
-.formGroup label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+.userstable tr:nth-child(even) {
+  background-color: #3b3b3b60;
 }
 
-.formGroup input, .formGroup select, .formGroup textarea {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+.userstable tr:hover {
+  background-color: #1d26337c;
 }
 
-.formGroup input[type="file"] {
-  padding: 3px;
-}
-
-.submitButton {
-  background-color: #4CAF50;
-  color: white;
+.modifyButton, .deleteButton {
+  background-color: #008CBA; /* Blue */
   border: none;
-  border-radius: 4px;
+  color: white;
+  padding: 8px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
   cursor: pointer;
-  padding: 10px 20px;
+  border-radius: 3px;
+  transition-duration: 0.4s;
 }
 
-.submitButton:hover {
-  background-color: #45a049;
+.deleteButton {
+  background-color: #f44336; /* Red */
+}
+
+.modifyButton:hover {
+  background-color: #007bb5;
+}
+
+.deleteButton:hover {
+  background-color: #d32f2f;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
 }
