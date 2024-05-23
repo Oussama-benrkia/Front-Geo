@@ -9,14 +9,26 @@ function ManagementUserProfile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const router = useRouter();
-
+  const usertoken = localStorage.getItem("token");
+  if (!usertoken) {
+    router.push("/login");
+  }
   useEffect(() => {
+    
     const fetchData = async () => {
+      const checkAuthentication = () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          router.push('/login');
+        }
+        return token;
+      };
+      const token=checkAuthentication()
       try {
         const response = await fetch('http://localhost:8081/api/users', {
           method: 'GET',
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbeyJhdXRob3JpdHkiOiJBZG1pbiJ9XSwic3ViIjoiQWRtaW5AQWRtaW4uY29tIiwiaWF0IjoxNzE2MTE5MTAwLCJleHAiOjE3MTY3MjM5MDB9.B2yEvK17qVKGd37fq4ZTKFD1yIKmjP7GClSLNp9dHZw`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           }
         });
@@ -50,6 +62,14 @@ function ManagementUserProfile() {
   };
 
   const handleDelete = async (id) => {
+    const checkAuthentication = () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        router.push('/login');
+      }
+      return token;
+    };
+    const token=checkAuthentication()
     const confirmed = window.confirm('Are you sure you want to delete this user?');
     if (!confirmed) {
       return;
@@ -59,7 +79,7 @@ function ManagementUserProfile() {
       const response = await fetch(`http://localhost:8081/api/users/${id}`, {
         method: 'DELETE',
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbeyJhdXRob3JpdHkiOiJBZG1pbiJ9XSwic3ViIjoiQWRtaW5AQWRtaW4uY29tIiwiaWF0IjoxNzE2MTE5MTAwLCJleHAiOjE3MTY3MjM5MDB9.B2yEvK17qVKGd37fq4ZTKFD1yIKmjP7GClSLNp9dHZw`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       });

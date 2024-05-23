@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import SidebarLayout from 'src/layouts/SidebarLayout';
+import SidebarLayout from '../src/layouts/SidebarLayout';
 import { useState } from 'react';
-import PageHeader from 'src/content/Dashboards/Tasks/PageHeader';
-import Footer from 'src/components/Footer';
+import PageHeader from '../src/content/Dashboards/Tasks/PageHeader';
+import Footer from '../src/components/Footer';
 import {
   Grid,
   Tab,

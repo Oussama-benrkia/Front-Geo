@@ -10,14 +10,22 @@ function Forms() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const router = useRouter();
-
+ 
   useEffect(() => {
+    const checkAuthentication = () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        router.push('/login');
+      }
+      return token;
+    };
+    const token=checkAuthentication()
     const fetchData = async () => {
       try {
         const response = await fetch('http://localhost:8081/api/vehicule', {
           method: 'GET',
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbeyJhdXRob3JpdHkiOiJBZG1pbiJ9XSwic3ViIjoiQWRtaW5AQWRtaW4uY29tIiwiaWF0IjoxNzE2MTE5MTAwLCJleHAiOjE3MTY3MjM5MDB9.B2yEvK17qVKGd37fq4ZTKFD1yIKmjP7GClSLNp9dHZw`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         });
@@ -57,10 +65,18 @@ function Forms() {
     }
 
     try {
+      const checkAuthentication = () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          router.push('/login');
+        }
+        return token;
+      };
+      const token =checkAuthentication()
       const response = await fetch(`http://localhost:8081/api/vehicule/${id}`, {
         method: 'DELETE',
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbeyJhdXRob3JpdHkiOiJBZG1pbiJ9XSwic3ViIjoiQWRtaW5AQWRtaW4uY29tIiwiaWF0IjoxNzE2MTE5MTAwLCJleHAiOjE3MTY3MjM5MDB9.B2yEvK17qVKGd37fq4ZTKFD1yIKmjP7GClSLNp9dHZw`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       });

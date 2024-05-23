@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 import { useRouter } from 'next/router';
 import SidebarLayout from 'src/layouts/SidebarLayout';
 import styles from './styles.module.css';
@@ -12,7 +12,16 @@ function AddUser() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const router = useRouter();
-
+  useEffect(() => {
+    const checkAuthentication = () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        router.push('/login');
+      }
+      return token;
+    };
+    let a=checkAuthentication()
+  })
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
@@ -25,12 +34,19 @@ function AddUser() {
     formData.append('lastname', last_name);
     formData.append('email', email);
     formData.append('password', password);
-
+    const checkAuthentication = () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        router.push('/login');
+      }
+      return token;
+    };
+    const token=checkAuthentication()
     try {
       const response = await fetch('http://localhost:8081/api/users', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbeyJhdXRob3JpdHkiOiJBZG1pbiJ9XSwic3ViIjoiQWRtaW5AQWRtaW4uY29tIiwiaWF0IjoxNzE2MTE5MTAwLCJleHAiOjE3MTY3MjM5MDB9.B2yEvK17qVKGd37fq4ZTKFD1yIKmjP7GClSLNp9dHZw`,
+          Authorization: `Bearer ${token}`,
         },
         body: formData,
       });
