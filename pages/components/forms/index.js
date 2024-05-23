@@ -3,6 +3,7 @@ import SidebarLayout from 'src/layouts/SidebarLayout';
 import { useState, useEffect } from 'react';
 import styles from './styles.module.css';
 import Link from 'next/link';
+
 function Forms() {
   const [vehicles, setVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -43,7 +44,7 @@ if (error) {
 const handleModify = (id) => {
   
   console.log(`Modify vehicle with ID: ${id}`);
-    navigate(`/edit-vehicle/${id}`);
+    router.push(`/edit-vehicle/${id}`);
 
 };
 const handleDelete = async (id) => {
@@ -124,10 +125,7 @@ return (
                 <td className={styles.th1}>{vehicle.status}</td>
                 <td className={styles.th1}>{vehicle.type}</td>
                 <td className={styles.th1}>
-                <Link href={`/edit-vehicle/${vehicle.id}`}>
-  <button className={styles.modifyButton}>Modify</button>
-</Link>
-
+                <button className={styles.modifyButton} onClick={() => handleModify(vehicle.id)}>Modify</button>
                 <button className={styles.deleteButton} onClick={() => handleDelete(vehicle.id)}>Delete</button>
                   </td>
               </tr>

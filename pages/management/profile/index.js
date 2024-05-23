@@ -45,6 +45,38 @@ const handleAddNewUser = () => {
   router.push('/add-user');
   // Implement add new vehicle functionality here
 };
+const handleDelete = async (id) => {
+  console.log(`Delete user with ID: ${id}`);
+
+  const confirmed = window.confirm('Are you sure you want to delete this user?');
+
+  if (!confirmed) {
+    return;
+  }
+
+  try {
+    const response = await fetch(`http://localhost:8081/api/vehicule/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbeyJhdXRob3JpdHkiOiJBZG1pbiJ9XSwic3ViIjoiQWRtaW5AQWRtaW4uY29tIiwiaWF0IjoxNzE2MTE5MTAwLCJleHAiOjE3MTY3MjM5MDB9.B2yEvK17qVKGd37fq4ZTKFD1yIKmjP7GClSLNp9dHZw`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      if (response.status === 403) {
+        throw new Error('Failed to delete user: Forbidden (403)');
+      }
+      throw new Error('Failed to delete user');
+    }
+
+    console.log('User deleted successfully');
+    setUsers(users.filter(user => user.id !== id));
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    setError(error);
+  }
+};
 return (
   <div className={styles.container}>
 <button className={styles.addButton} onClick={handleAddNewUser}>Add New User</button>
@@ -68,8 +100,8 @@ return (
             <td className={styles.th1}>{user.email}</td>
             <td className={styles.th1}>{user.role}</td>
             <td className={styles.th1}>
-<button className={styles.modifyButton} onClick={() => handleModify(vehicle.id)}>Modify</button>
-<button className={styles.deleteButton} onClick={() => handleDelete(vehicle.id)}>Delete</button>
+<button className={styles.modifyButton} onClick={() => handleModify(user.id)}>Modify</button>
+<button className={styles.deleteButton} onClick={() => handleDelete(user.id)}>Delete</button>
   </td>
           </tr>
         ))}
