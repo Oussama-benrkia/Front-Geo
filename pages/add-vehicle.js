@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import styles from './components/forms/styles.module.css';
@@ -13,15 +13,17 @@ function AddVehicle() {
   const [image, setImage] = useState(null);
   const router = useRouter();
 
+  useEffect(() => {
+    const fetchData = async() =>{
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setError(new Error("No token found"));
+        setLoading(false);
+        return;
+      }
+    }})
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const token = localStorage.getItem("token");
-    if (!token) {
-      alert("No token found");
-      return;
-    }
-
     const formData = new FormData();
     formData.append('matricule', matricule);
     formData.append('nom', nom);
@@ -32,12 +34,18 @@ function AddVehicle() {
     if (image) {
       formData.append('image', image);
     }
-
+    
+        const token = localStorage.getItem("token");
+        if (!token) {
+          setError(new Error("No token found"));
+          setLoading(false);
+          return;
+        }
     try {
       const response = await fetch('http://localhost:8081/api/vehicule', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbeyJhdXRob3JpdHkiOiJBZG1pbiJ9XSwic3ViIjoiQWRtaW5AQWRtaW4uY29tIiwiaWF0IjoxNzE2MTE5MTAwLCJleHAiOjE3MTY3MjM5MDB9.B2yEvK17qVKGd37fq4ZTKFD1yIKmjP7GClSLNp9dHZw`,
         },
         body: formData,
       });
