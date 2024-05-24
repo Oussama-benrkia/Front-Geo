@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import SidebarLayout from 'src/layouts/SidebarLayout';
 import { useRouter } from 'next/router';
+import styles from './styles/localisation.module.css';
 
 // Dynamically import Leaflet with SSR disabled
 const Leaflet = dynamic(() => import('leaflet'), { ssr: false });
@@ -12,6 +13,8 @@ function ManagementUserSettings() {
   const [error, setError] = useState(null);
   const [map, setMap] = useState(null); // State to store the map instance
   const router = useRouter();
+  const [vehicles, setVehicles] = useState([]);
+
   const fetchData = async () => {
     try {
       const response = await fetch('http://localhost:8081/api/vehicule', {
@@ -101,6 +104,16 @@ function ManagementUserSettings() {
     };
 
     initializeMap();
+
+    fetch('http://localhost:8081/api/vehicule', {
+          // headers: {
+          //   'Authorization': `Bearer ${token}`
+          // }
+        })
+          .then(response => response.json())
+          .then(data => setVehicles(data));
+
+  
   }, []); // Run only once on component mount
 
   return (
@@ -109,7 +122,19 @@ function ManagementUserSettings() {
         {/* Include Leaflet CSS */}
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
       </Head>
-      <div id="map" style={{ height: '85vh' }}></div>
+      <div style={{ display: 'flex' }}>
+        <div className={styles['sidebar-2']}>
+          <h2 className={styles['sidebar-h2']}>Vehicles</h2>
+          <div className={styles['sidebar']}>
+          <ul className={styles['sidebar-ul']}>
+            {vehicles.map((vehicle, index) => (
+              <li key={index} className={styles['sidebar-ul-li']}>{vehicle.matricule} - {vehicle.modele}</li>
+            ))}
+          </ul>
+        </div>
+        </div>
+      <div id="map" style={{ height: '85vh', width:'250vh'}}></div>
+      </div>
     </>
   );
 }
