@@ -95,7 +95,7 @@ function VehicleSearch() {
           <Typography variant="subtitle2">
             Showing{' '}
             <Text color="black">
-              <b>57 tasks</b>
+              <b> vehicles</b>
             </Text>
           </Typography>
         </Box>
@@ -155,11 +155,36 @@ function VehicleSearch() {
             }}
           >
             <Box>
-              <Rating value={4} defaultValue={5} precision={1} readOnly />
-            </Box>
-            <Link href="#" variant="h3" color="text.primary">
-              Migrate hosting to a more performant web server datacenter
-            </Link>
+  <Avatar
+    sx={{
+      mx: 'auto',
+      mb: 1.5,
+      width: theme.spacing(12),
+      height: theme.spacing(12)
+    }}
+    variant="rounded"
+    alt=""
+    src="/static/images/vehicles/BMW_M5.jpg"
+  />
+  <Typography align="center" variant="h4" gutterBottom>
+    BMW M5
+  </Typography>
+  <Typography align="center" variant="subtitle2" gutterBottom>
+    Vehicle added recently
+  </Typography>
+  <Box display="flex" alignItems="center" justifyContent="center">
+    <Rating value={4} defaultValue={5} precision={1} readOnly />
+    <Typography
+      variant="h5"
+      sx={{
+        pl: 0.5
+      }}
+    >
+      4.1
+    </Typography>
+  </Box>
+  </Box>
+  
             <Box
               sx={{
                 py: 2
@@ -192,12 +217,10 @@ function VehicleSearch() {
               }}
               color="text.secondary"
             >
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout beatae
-              vitae dicta sunt explicabo.
+            
             </Typography>
             <Button size="small" variant="contained">
-              View task
+              View Trajet
             </Button>
             <Divider
               sx={{
@@ -224,9 +247,11 @@ function VehicleSearch() {
                 {formatDistance(subDays(new Date(), 24), new Date(), {
                   addSuffix: true
                 })}
+                /////
               </Typography>
               <AvatarGroup>
                 <Tooltip arrow title={`$"View profile for')} Remy Sharp`}>
+                  
                   <Avatar
                     sx={{
                       width: 30,
@@ -263,11 +288,35 @@ function VehicleSearch() {
             }}
           >
             <Box>
-              <Rating value={4} defaultValue={5} precision={1} readOnly />
-            </Box>
-            <Link href="#" variant="h3" color="text.primary">
-              Improve conversion rated by integrating new analytics tools
-            </Link>
+ <Avatar
+   sx={{
+     mx: 'auto',
+     mb: 1.5,
+     width: theme.spacing(12),
+     height: theme.spacing(12)
+   }}
+   variant="rounded"
+   alt=""
+   src="/static/images/vehicles/TOYOTA_CAMARO.jpg"
+ />
+ <Typography align="center" variant="h4" gutterBottom>
+   TOYOTA CAMARO
+ </Typography>
+ <Typography align="center" variant="subtitle2" gutterBottom>
+   Vehicle added recently
+ </Typography>
+ <Box display="flex" alignItems="center" justifyContent="center">
+   <Rating value={4} defaultValue={5} precision={1} readOnly />
+   <Typography
+     variant="h5"
+     sx={{
+       pl: 0.5
+     }}
+   >
+     4.1
+   </Typography>
+ </Box>
+ </Box>
             <Box
               sx={{
                 py: 2
@@ -300,12 +349,9 @@ function VehicleSearch() {
               }}
               color="text.secondary"
             >
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae ab illo.
             </Typography>
             <Button size="small" variant="contained">
-              View task
+              View Trajet
             </Button>
             <Divider
               sx={{
@@ -382,12 +428,36 @@ function VehicleSearch() {
               background: `${theme.colors.alpha.black[5]}`
             }}
           >
-            <Box>
-              <Rating value={4} defaultValue={5} precision={1} readOnly />
-            </Box>
-            <Link href="#" variant="h3" color="text.primary">
-              Increase the website speed on mobile and tablet devices
-            </Link>
+                       <Box>
+ <Avatar
+   sx={{
+     mx: 'auto',
+     mb: 1.5,
+     width: theme.spacing(12),
+     height: theme.spacing(12)
+   }}
+   variant="rounded"
+   alt=""
+   src="/static/images/vehicles/PEUGO_S.jpg"
+ />
+ <Typography align="center" variant="h4" gutterBottom>
+   PEUGEOT  S
+ </Typography>
+ <Typography align="center" variant="subtitle2" gutterBottom>
+   Vehicle added recently
+ </Typography>
+ <Box display="flex" alignItems="center" justifyContent="center">
+   <Rating value={4} defaultValue={5} precision={1} readOnly />
+   <Typography
+     variant="h5"
+     sx={{
+       pl: 0.5
+     }}
+   >
+     4.1
+   </Typography>
+ </Box>
+ </Box>
             <Box
               sx={{
                 py: 2
@@ -420,9 +490,6 @@ function VehicleSearch() {
               }}
               color="text.secondary"
             >
-              Nemo enim ipsam voluptatem quia accusantium doloremque laudantium
-              voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-              magni dolores eos qui ratione.
             </Typography>
             <Button size="small" variant="contained">
               View task

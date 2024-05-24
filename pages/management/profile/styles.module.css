@@ -38,9 +38,6 @@
   text-align: left;
 }
 
-.userstable tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
 
 .userstable tr:hover {
   background-color: #dddddd36;

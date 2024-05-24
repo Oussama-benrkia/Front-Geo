@@ -33,6 +33,7 @@ function AddUser() {
     formData.append('firstname', first_name);
     formData.append('lastname', last_name);
     formData.append('email', email);
+    formData.append('role', role);
     formData.append('password', password);
     const checkAuthentication = () => {
       const token = localStorage.getItem('token');
@@ -99,6 +100,14 @@ function AddUser() {
           />
         </div>
         <div className={styles.formGroup}>
+          <label>Role:</label>
+          <select             className={styles.input}
+ value={role} onChange={(e) => setRole(e.target.value)}>
+            <option value="User">User</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
+        <div className={styles.formGroup}>
           <label className={styles.label}>Password:</label>
           <input
             type="password"
@@ -108,6 +117,7 @@ function AddUser() {
             className={styles.input}
           />
         </div>
+        
         <div className={styles.formGroup}>
           <label className={styles.label}>Confirm Password:</label>
           <input

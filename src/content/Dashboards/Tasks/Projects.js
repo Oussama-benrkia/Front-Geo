@@ -66,6 +66,7 @@ const LinearProgressWrapper = styled(LinearProgress)(
 /**
  * Projects component renders a list of project cards with task progress and team members
  */
+
 function Projects() {
   const theme = useTheme();
 
