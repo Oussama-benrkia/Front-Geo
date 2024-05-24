@@ -65,18 +65,14 @@ function Forms() {
     }
 
     try {
-      const checkAuthentication = () => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          router.push('/login');
-        }
-        return token;
-      };
-      const token =checkAuthentication()
+      const usertoken = localStorage.getItem("token");
+      if (usertoken) {
+        router.push("/login");
+      }
       const response = await fetch(`http://localhost:8081/api/vehicule/${id}`, {
         method: 'DELETE',
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${usertoken}`,
           'Content-Type': 'application/json',
         },
       });

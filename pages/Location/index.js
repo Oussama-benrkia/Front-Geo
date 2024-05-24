@@ -1,93 +1,121 @@
 import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import SidebarLayout from 'src/layouts/SidebarLayout';
-import L from 'leaflet';
+import { useRouter } from 'next/router';
+
+// Dynamically import Leaflet with SSR disabled
+const Leaflet = dynamic(() => import('leaflet'), { ssr: false });
 
 function ManagementUserSettings() {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [map, setMap] = useState(null); // State to store the map instance
+  const router = useRouter();
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:8081/api/vehicule', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      setError(error);
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const checkAuthentication=()=>{
-    const token = localStorage.getItem('token');
-    if (!token) {
-      router.push('/login');
-    }
-    return token;
-  };
-  const token=checkAuthentication()
-      if (document) {
-      // Initialize map
-      const mapInstance = L.map('map');
+    const initializeMap = async () => {
+      try {
+        // Fetch vehicle data
+        const L = await import('leaflet');
+        const mapInstance = L.map('map');
 
-      // Add OSM tile layer
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(mapInstance);
+        // Add OSM tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(mapInstance);
 
-      // Define virtual coordinates
-      const virtualCoordinates = [
-        [31.630000, -8.008889] // Initial position
-      ];
+        // Center map to initial position
+        mapInstance.setView([31.630000, -8.008889], 13);
 
-      // Create marker
-      const marker = L.marker(virtualCoordinates[0], {
-        icon: L.icon({
-          iconUrl: './car-svgrepo-com.svg',
-          iconSize: [20, 20],
-          iconAnchor: [20, 20],
-          popupAnchor: [-3, -76],
-          shadowSize: [20, 20],
-          shadowAnchor: [20, 20],
-        })
-      }).addTo(mapInstance).bindTooltip('HELLO');
+        // Set the map instance to state
+        setMap(mapInstance);
 
-      // Center map to initial position
-      mapInstance.setView(virtualCoordinates[0], 13);
+        const updateMarkers = async () => {
+          try {
+            const vehicles = await fetchData();
+            // Clear previous markers before adding new ones
+            mapInstance.eachLayer(layer => {
+              if (layer instanceof L.Marker) {
+                mapInstance.removeLayer(layer);
+              }
+            });
 
-      // Set the map instance to state
-      setMap(mapInstance);
+            // Create markers for each vehicle
+            vehicles.forEach(vehicle => {
+              const { matricule, nom, modele, status, lastpostion } = vehicle;
+              if (lastpostion != null) {
+                L.marker(lastpostion, {
+                  icon: L.icon({
+                    iconUrl: './car.svg',
+                    iconSize: [20, 20],
+                    iconAnchor: [10, 20],
+                    popupAnchor: [-3, -76],
+                    shadowSize: [20, 20],
+                    shadowAnchor: [10, 20],
+                  })
+                }).addTo(mapInstance).bindTooltip(`
+                  <div>
+                    <strong>${matricule}</strong><br />
+                    Name: ${nom}<br />
+                    Model: ${modele}<br />
+                    Status: ${status}<br />
+                    Coordinates: ${lastpostion.join(', ')}
+                  </div>
+                `);
+              }
+            });
+          } catch (error) {
+            setError(error);
+            setLoading(false);
+          }
+        };
 
-      // Update marker position
-      const updateMarkerPosition = () => {
-        setInterval(() => {
-          // Generate random numbers for latitude and longitude
-          const randomX = getRandomNumber(-0.001, 0.001);
-          const randomY = getRandomNumber(-0.001, 0.001);
+        // Update markers periodically
+        const intervalId = setInterval(updateMarkers, 10000); // Adjust the interval as needed
 
-          // Update virtual coordinates
-          virtualCoordinates[0][0] += randomX;
-          virtualCoordinates[0][1] += randomY;
+        // Initial marker update
+        await updateMarkers();
 
-          // Update marker position
-          marker.setLatLng(virtualCoordinates[0]);
+        // Clean up interval on component unmount
+        return () => clearInterval(intervalId);
 
-          // Pan the map to the new position
-          mapInstance.panTo(virtualCoordinates[0]);
-        }, 1000); // Update position every 3 seconds
-      };
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
 
-      // Call the function to update marker position
-      updateMarkerPosition();
-    }
+    initializeMap();
   }, []); // Run only once on component mount
-
-  // Function to generate a random number between min and max
-  const getRandomNumber = (min, max) => {
-    return Math.random() * (max - min) + min;
-  };
-
-  // Function to download JSON data as a file
-  const downloadJSON = () => {
-    // Code for downloading JSON data
-  };
 
   return (
     <>
       <Head>
         {/* Include Leaflet CSS */}
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-        {/* Include Leaflet JavaScript */}
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
       </Head>
       <div id="map" style={{ height: '85vh' }}></div>
     </>

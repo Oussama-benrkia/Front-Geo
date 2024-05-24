@@ -231,6 +231,23 @@ function SidebarMenu() {
                 </NextLink>
               </ListItem>
               <ListItem component="div">
+                <NextLink href="/trajet" passHref>
+                  <Button
+                    className={
+                      currentRoute === '/trajet'
+                        ? 'active'
+                        : ''
+                    }
+                    disableRipple
+                    component="a"
+                    onClick={closeSidebar}
+                    startIcon={<DisplaySettingsTwoToneIcon />}
+                  >
+                    trajet
+                  </Button>
+                </NextLink>
+              </ListItem>
+              <ListItem component="div">
                 <NextLink href="/components/forms" passHref>
                   <Button
                     className={
