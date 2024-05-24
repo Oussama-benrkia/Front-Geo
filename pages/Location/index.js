@@ -12,7 +12,6 @@ function ManagementUserSettings() {
   const [error, setError] = useState(null);
   const [map, setMap] = useState(null); // State to store the map instance
   const router = useRouter();
-
   const fetchData = async () => {
     try {
       const response = await fetch('http://localhost:8081/api/vehicule', {
@@ -34,23 +33,16 @@ function ManagementUserSettings() {
       setLoading(false);
     }
   };
-
   useEffect(() => {
     const initializeMap = async () => {
       try {
-        // Fetch vehicle data
         const L = await import('leaflet');
         const mapInstance = L.map('map');
-
-        // Add OSM tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(mapInstance);
-
-        // Center map to initial position
         mapInstance.setView([31.630000, -8.008889], 13);
 
-        // Set the map instance to state
         setMap(mapInstance);
 
         const updateMarkers = async () => {
