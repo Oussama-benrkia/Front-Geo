@@ -3,14 +3,13 @@ import { useRouter } from 'next/router';
 import SidebarLayout from 'src/layouts/SidebarLayout';
 import { useState, useEffect } from 'react';
 import styles from './styles.module.css';
-import Link from 'next/link';
 
-function Forms() {
+const forms = () => {
   const [vehicles, setVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const router = useRouter();
- 
+
   useEffect(() => {
     const checkAuthentication = () => {
       const token = localStorage.getItem('token');
@@ -19,7 +18,8 @@ function Forms() {
       }
       return token;
     };
-    const token=checkAuthentication()
+
+    const token = checkAuthentication();
     const fetchData = async () => {
       try {
         const response = await fetch('http://localhost:8081/api/vehicule', {
@@ -44,18 +44,14 @@ function Forms() {
     };
 
     fetchData();
-  }, []);
-
-  if (loading) {
-    return <div className={styles.loading}>Loading...</div>;
-  }
-
-  if (error) {
-    return <div className={styles.error}>Error loading vehicles</div>;
-  }
+  }, [router]);
 
   const handleAddNewVehicle = () => {
     router.push('/add-vehicle');
+  };
+
+  const handleModify = (id) => {
+    router.push(`/editVehicule/${id}`);
   };
 
   const handleDelete = async (id) => {
@@ -66,7 +62,7 @@ function Forms() {
 
     try {
       const usertoken = localStorage.getItem("token");
-      if (usertoken) {
+      if (!usertoken) {
         router.push("/login");
       }
       const response = await fetch(`http://localhost:8081/api/vehicule/${id}`, {
@@ -91,10 +87,16 @@ function Forms() {
     }
   };
 
+  if (loading) {
+    return <div className={styles.loading}>Loading...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.error}>Error loading vehicles</div>;
+  }
+
   return (
     <>
-      
-
       <div className={styles.container}>
         <button className={styles.addButton} onClick={handleAddNewVehicle}>Add New Vehicle</button>
         <table className={styles.userstable}>
@@ -143,8 +145,8 @@ function Forms() {
       </div>
     </>
   );
-}
+};
 
-Forms.getLayout = (page) => <SidebarLayout>{page}</SidebarLayout>;
+forms.getLayout = (page) => <SidebarLayout>{page}</SidebarLayout>;
 
-export default Forms;
+export default forms;
