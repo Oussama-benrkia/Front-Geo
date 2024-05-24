@@ -120,13 +120,14 @@ function ManagementUserSettings() {
           width: 200px;
           font-size: 16px;
           text-align: center;
+          background-color: #111633f2;
         }
         .search-button {
           padding: 10px 20px;
           border: none;
           border-radius: 4px;
           background-color: #007bff;
-          color: black;
+          color: whait;
           cursor: pointer;
           font-size: 16px;
         }
