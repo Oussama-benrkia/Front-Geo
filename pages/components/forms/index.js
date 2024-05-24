@@ -92,44 +92,56 @@ function Forms() {
   };
 
   return (
-    <div className={styles.container}>
-      <button className={styles.addButton} onClick={handleAddNewVehicle}>Add New Vehicle</button>
-      <table className={styles.userstable}>
-        <thead>
-          <tr>
-            <th>Matricule</th>
-            <th>Nom</th>
-            <th>Modele</th>
-            <th>Etat</th>
-            <th>Status</th>
-            <th>Type</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {vehicles.map((vehicle, i) => {
-            const etatDisplay = vehicle.etat ? "actif" : "inactif";
-            const etatColor = vehicle.etat ? "green" : "red";
-            return (
-              <tr key={i}>
-                <td>{vehicle.matricule}</td>
-                <td>{vehicle.nom}</td>
-                <td>{vehicle.modele}</td>
-                <td style={{ color: etatColor }}>{etatDisplay}</td>
-                <td>{vehicle.status}</td>
-                <td>{vehicle.type}</td>
-                <td>
-                  <Link href={`/edit-vehicle/${vehicle.id}`}>
-                    <button className={styles.modifyButton}>Modify</button>
-                  </Link>
-                  <button className={styles.deleteButton} onClick={() => handleDelete(vehicle.id)}>Delete</button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+    <>
+      
+
+      <div className={styles.container}>
+        <button className={styles.addButton} onClick={handleAddNewVehicle}>Add New Vehicle</button>
+        <table className={styles.userstable}>
+          <thead>
+            <tr className={styles.tr1}>
+              <th className={styles.th1}>ID</th>
+              <th className={styles.th1}>Matricule</th>
+              <th className={styles.th1}>Nom</th>
+              <th className={styles.th1}>Modele</th>
+              <th className={styles.th1}>Etat</th>
+              <th className={styles.th1}>Status</th>
+              <th className={styles.th1}>Type</th>
+              <th className={styles.th1}>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {vehicles.map((vehicle, i) => {
+              let etatDisplay;
+              let etatColor;
+              if (vehicle.etat === true) {
+                etatDisplay = "actif";
+                etatColor = "green";
+              } else if (vehicle.etat === false) {
+                etatDisplay = "inactif";
+                etatColor = "red";
+              }
+              console.log(`Vehicle ID: ${vehicle.id}, Etat: ${vehicle.etat}, Display: ${etatDisplay}`);
+              return (
+                <tr className={styles.tr1} key={i}>
+                  <td className={styles.th1}>{vehicle.id}</td>
+                  <td className={styles.th1}>{vehicle.matricule}</td>
+                  <td className={styles.th1}>{vehicle.nom}</td>
+                  <td className={styles.th1}>{vehicle.modele}</td>
+                  <td className={styles.th1} style={{ color: etatColor }}>{etatDisplay}</td>
+                  <td className={styles.th1}>{vehicle.status}</td>
+                  <td className={styles.th1}>{vehicle.type}</td>
+                  <td className={styles.th1}>
+                    <button className={styles.modifyButton} onClick={() => handleModify(vehicle.id)}>Modify</button>
+                    <button className={styles.deleteButton} onClick={() => handleDelete(vehicle.id)}>Delete</button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
 

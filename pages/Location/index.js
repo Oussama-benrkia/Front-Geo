@@ -38,21 +38,32 @@ function ManagementUserSettings() {
   useEffect(() => {
     const initializeMap = async () => {
       try {
+        // Fetch vehicle data
         const L = await import('leaflet');
         const mapInstance = L.map('map');
+
+        // Add OSM tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(mapInstance);
+
+        // Center map to initial position
         mapInstance.setView([31.630000, -8.008889], 13);
+
+        // Set the map instance to state
         setMap(mapInstance);
+
         const updateMarkers = async () => {
           try {
             const vehicles = await fetchData();
+            // Clear previous markers before adding new ones
             mapInstance.eachLayer(layer => {
               if (layer instanceof L.Marker) {
                 mapInstance.removeLayer(layer);
               }
             });
+
+            // Create markers for each vehicle
             vehicles.forEach(vehicle => {
               const { matricule, nom, modele, status, lastpostion } = vehicle;
               if (lastpostion != null) {
@@ -82,9 +93,15 @@ function ManagementUserSettings() {
           }
         };
 
+        // Update markers periodically
         const intervalId = setInterval(updateMarkers, 10000); // Adjust the interval as needed
+
+        // Initial marker update
         await updateMarkers();
+
+        // Clean up interval on component unmount
         return () => clearInterval(intervalId);
+
       } catch (error) {
         setError(error);
         setLoading(false);
@@ -92,11 +109,12 @@ function ManagementUserSettings() {
     };
 
     initializeMap();
-  }, []); 
+  }, []); // Run only once on component mount
 
   return (
     <>
       <Head>
+        {/* Include Leaflet CSS */}
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
       </Head>
       <div id="map" style={{ height: '85vh' }}></div>
